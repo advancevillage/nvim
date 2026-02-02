@@ -8,6 +8,7 @@ local on_attach = function(client, bufnr)
   -- LSP 常用快捷键配置
   -- 注意：这里使用的是 <Leader>gd，如果你习惯直接按 gd，请去掉 <Leader>
   vim.keymap.set('n', '<Leader>gd', vim.lsp.buf.definition, opts)
+  vim.keymap.set('n', '<Leader>gdd', vim.cmd.Undojoin or vim.cmd.normal, opts)
   vim.keymap.set('n', '<Leader>gi', vim.lsp.buf.implementation, opts)
   vim.keymap.set('n', '<Leader>gr', vim.lsp.buf.references, opts)
   vim.keymap.set('n', '<Leader>gh', vim.lsp.buf.hover, opts)
