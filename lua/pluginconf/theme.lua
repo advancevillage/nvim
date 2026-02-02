@@ -1,58 +1,23 @@
--- lua/pluginconf/theme.lua
-vim.opt.termguicolors = true
-vim.opt.background = "dark"
+-- 关掉真彩色，适配 Terminal.app
+vim.opt.termguicolors = false
 
 local ok, onedark = pcall(require, "onedark")
 if not ok then return end
 
 onedark.setup({
-  style = "dark",
-
-  code_style = {
-    comments  = "italic",
-    keywords  = "none",
-    functions = "bold",
-    strings   = "none",
-    variables = "none",
-  },
-
+  style = 'dark',
+  -- 重点：在 256 色环境下，禁用所有复杂的 Treesitter 插件支持
   plugins = {
-    ["nvim-treesitter"] = true,
-    ["nvim-lspconfig"] = true,
-  },
-
-  highlights = {
-    -- 类型
-    ["@type"]         = { fg = "#e5c07b", fmt = "bold" }, -- 黄色
-    ["@type.builtin"] = { fg = "#e06c75" },               -- 红色
-
-    -- 函数 / 方法（只加粗，不改颜色）
-    ["@function"] = { fmt = "bold" },
-    ["@method"]   = { fmt = "bold" },
-
-    -- 参数（含 receiver）
-    ["@parameter"] = { fg = "#abb2bf", fmt = "italic" }, -- 浅灰
-
-    -- 变量
-    ["@variable"] = { fg = "#abb2bf" },
-
-    -- 控制流
-    ["@conditional"] = { fg = "#c678dd" },
-    ["@repeat"]      = { fg = "#c678dd" },
-
-    -- 字面量
-    ["@string"]  = { fg = "#98c379" },
-    ["@number"]  = { fg = "#d19a66" },
-    ["@boolean"] = { fg = "#d19a66" },
-
-    -- 注释
-    ["@comment"] = { fg = "#5c6370", fmt = "italic" },
-
-    -- 运算符 / 标点
-    ["@operator"]              = { fg = "#abb2bf" },
-    ["@punctuation.delimiter"] = { fg = "#5c6370" },
-    ["@punctuation.bracket"]   = { fg = "#5c6370" },
+    ["nvim-treesitter"] = false, 
+    ["nvim-lspconfig"] = false,
   },
 })
 
-onedark.load()
+-- 强行加载
+vim.cmd("colorscheme onedark")
+
+-- 补丁：如果还是蓝屏，强行重置 Normal 背景
+vim.cmd([[
+  hi Normal ctermbg=NONE
+  hi NonText ctermbg=NONE
+]])

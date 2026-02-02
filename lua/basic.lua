@@ -28,7 +28,6 @@ vim.opt.background = "light"        -- 背景颜色
 vim.opt.magic = true                -- 正则匹配规则
 vim.opt.history = 500               -- 历史记录行数
 vim.opt.report = 0                  -- 修改行数小于 report 不显示
-vim.opt.termguicolors = true
 
 --========================
 ----> 文件设置
