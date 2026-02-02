@@ -46,10 +46,10 @@ return require('packer').startup({
     }
 
     -- 主题插件
-    use {
-      'navarasu/onedark.nvim',
+    use { 
+      'morhetz/gruvbox',
       config = function()
-        require('pluginconf.theme')
+        require('pluginconf.theme') -- 确保主题配置在这里加载
       end
     }
 

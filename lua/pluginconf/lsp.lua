@@ -21,6 +21,7 @@ lspconfig.gopls.setup({
   on_attach = on_attach, -- 关键修复：将快捷键绑定函数传递给 gopls
   settings = {
     gopls = {
+      semanticTokens = true,  -- 必须
       analyses = {
         unusedparams = true,
       },
