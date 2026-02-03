@@ -1,4 +1,5 @@
-local lspconfig = require("lspconfig")
+vim.g.lspconfig_suppress_deprecation_warnings = true
+local lspconfig = require('lspconfig')
 
 -- 1. 关键：获取 nvim-cmp 的补全能力支持
 -- 如果没有这一步，gopls 不会主动向编辑器发送补全候选词

@@ -66,6 +66,24 @@ return require('packer').startup({
         require('pluginconf.cmp')
       end
     }
+
+    use {
+      'folke/snacks.nvim',
+      priority = 1000,
+      lazy = false,
+      config = function()
+        require('pluginconf.snacks') -- 指向新创建的文件
+      end
+    }
+
+    -- AI 增强: Claude Code
+    use {
+      'coder/claudecode.nvim',
+      requires = { 'nvim-lua/plenary.nvim', 'folke/snacks.nvim' },
+      config = function()
+        require('pluginconf.cc') -- 指向 lua/pluginconf/cc.lua
+      end
+    }
   -- 注意：这里是插件列表 function(use) 的结束
   end,
 
