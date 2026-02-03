@@ -5,3 +5,10 @@
 brew install tree-sitter
 brew install tree-sitter-cli
 ```
+
+
+### github代理
+```
+git config --global http.https://github.com.proxy http://127.0.0.1:7890
+git config --global https.https://github.com.proxy http://127.0.0.1:7890
+```

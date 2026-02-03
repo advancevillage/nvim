@@ -13,24 +13,17 @@ return require('packer').startup({
     -- fzf 插件
     use {
       'junegunn/fzf',
-      run = function()
-        vim.fn['fzf#install']()
-      end
+      run = function() vim.fn['fzf#install']() end
     }
-
     use {
       'junegunn/fzf.vim',
-      config = function()
-        require('pluginconf.fzf')
-      end
+      config = function() require('pluginconf.fzf') end
     }
 
     -- NERDTree 文件树
     use {
       'preservim/nerdtree',
-      config = function()
-        require('pluginconf.nerdtree')
-      end
+      config = function() require('pluginconf.nerdtree') end
     }
 
     -- Tree-sitter
@@ -40,37 +33,43 @@ return require('packer').startup({
         local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
         ts_update()
       end,
-      config = function()
-        require('pluginconf.treesitter')
-      end
+      config = function() require('pluginconf.treesitter') end
     }
 
     -- 主题插件
     use { 
       'morhetz/gruvbox',
-      config = function()
-        require('pluginconf.theme') -- 确保主题配置在这里加载
-      end
+      config = function() require('pluginconf.theme') end
     }
 
     -- LSP
     use {
       'neovim/nvim-lspconfig',
-      config = function()
-        require('pluginconf.lsp')
-      end
+      config = function() require('pluginconf.lsp') end
     }
 
     -- Copilot
     use {
       'github/copilot.vim',
+      config = function() require('pluginconf.copilot') end
+    }
+
+    -- 核心补全引擎
+    use {
+      'hrsh7th/nvim-cmp',
+      requires = {
+        'hrsh7th/cmp-nvim-lsp',     -- LSP 补全源
+        'hrsh7th/cmp-buffer',       -- 文本补全源
+        'hrsh7th/cmp-path',         -- 路径补全源
+      },
       config = function()
-        require('pluginconf.copilot')
+        require('pluginconf.cmp')
       end
     }
+  -- 注意：这里是插件列表 function(use) 的结束
   end,
 
-  -- packer 全局配置
+  -- packer 全局配置：它是 startup 传入表的第二个 key，与第一个 key（插件函数）并列
   config = {
     git = {
       timeout = 300,
