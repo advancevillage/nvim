@@ -76,6 +76,7 @@ vim.api.nvim_set_hl(0, "@keyword.return.go", { fg = p.red, ctermfg = 124, bold =
 vim.api.nvim_set_hl(0, "Comment",       { fg = p.gray, ctermfg = 246, italic = true, bg = p.bg })
 
 -- 默认文字 & 背景
+vim.api.nvim_set_hl(0, "CmpSel", { bg = "#a7c080", fg = "#282828", bold = true })
 vim.api.nvim_set_hl(0, "SignColumn", { bg = p.bg, ctermbg = 230 })
 vim.api.nvim_set_hl(0, "FoldColumn", { bg = p.bg, ctermbg = 230 })
 
