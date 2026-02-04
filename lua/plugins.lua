@@ -9,14 +9,6 @@ return {
     end
   },
 
-  {
-    "folke/snacks.nvim",
-    priority = 1000,
-    lazy = false,
-    -- 这里的 config 会自动寻找并执行 lua/pluginconf/snacks.lua
-    config = function() require("pluginconf.snacks") end,
-  },
-
   -- NERDTree 文件树
   {
     'preservim/nerdtree',
@@ -60,6 +52,12 @@ return {
     config = function()
       require('pluginconf.cmp')
     end
+  },
+
+  {
+    "folke/snacks.nvim",
+    -- 这里的 config 会自动寻找并执行 lua/pluginconf/snacks.lua
+    config = function() require("pluginconf.snacks") end,
   }
 }
 
