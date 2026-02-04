@@ -24,19 +24,16 @@ end
 -- 3. 配置 Golang LSP (gopls)
 lspconfig.gopls.setup({
   on_attach = on_attach,
-  capabilities = capabilities, -- 必须添加：将补全能力传递给服务器
+  capabilities = capabilities,
   settings = {
     gopls = {
-      semanticTokens = true,
-      analyses = {
-        unusedparams = true,
-      },
+      analyses = { unusedparams = true },
       staticcheck = true,
       gofumpt = true,
-      -- 增强补全配置
-      completeUnimported = true, -- 自动补全未导入的包，并在确认后自动 import
-      usePlaceholders = true,    -- 补全函数时自动带上参数占位符
-      deepCompletion = true,     -- 深度补全，输入 "." 时更智能
+      completeUnimported = true,
+      usePlaceholders = true,
+      deepCompletion = true,
+      semanticTokens = true,
     },
   },
 })

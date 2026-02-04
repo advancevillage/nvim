@@ -6,6 +6,7 @@
 --========================
 vim.opt.foldenable = true
 vim.opt.foldlevelstart = 99
+vim.g.lspconfig_suppress_deprecation_warnings = true
 
 --========================
 ----> 显示设置
