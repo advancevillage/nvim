@@ -1,6 +1,3 @@
-vim.g.lspconfig_suppress_deprecation_warnings = true
-local lspconfig = require('lspconfig')
-
 -- 1. 关键：获取 nvim-cmp 的补全能力支持
 -- 如果没有这一步，gopls 不会主动向编辑器发送补全候选词
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -22,7 +19,7 @@ local on_attach = function(client, bufnr)
 end
 
 -- 3. 配置 Golang LSP (gopls)
-lspconfig.gopls.setup({
+vim.lsp.config('gopls', {
   on_attach = on_attach,
   capabilities = capabilities,
   settings = {
@@ -37,6 +34,8 @@ lspconfig.gopls.setup({
     },
   },
 })
+vim.lsp.enable('gopls')
+
 
 -- 4. 自动处理：保存时整理 import 并格式化
 vim.api.nvim_create_autocmd("BufWritePre", {
