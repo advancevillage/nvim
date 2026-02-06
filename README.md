@@ -17,9 +17,13 @@ git config --global https.https://github.com.proxy http://127.0.0.1:7890
 ```
 node -v
 npm install -g @anthropic-ai/claude-code
-claude install
-echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bash_profile && source ~/.bash_profile
 
 ANTHROPIC_AUTH_TOKEN=
 ANTHROPIC_BASE_URL=
+```
+
+### Copilot
+```
+node -v
+node: v20.x.y
 ```
