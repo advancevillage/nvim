@@ -24,6 +24,9 @@ ANTHROPIC_BASE_URL=
 
 ### Copilot
 ```
+brew unlink node
+brew install node@20
+brew link --force --overwrite node@20
 node -v
 node: v20.x.y
 ```
