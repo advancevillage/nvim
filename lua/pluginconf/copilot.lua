@@ -2,6 +2,7 @@
 vim.g.copilot_filetypes = {
     ["*"] = false,
     ["go"] = true,
+    ["markdown"] = true,
 }
 
 -- 2. 禁用默认的 Tab 键映射，防止冲突
