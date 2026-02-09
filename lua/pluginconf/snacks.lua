@@ -1,70 +1,89 @@
--- ~/.config/nvim/lua/pluginconf/snacks.lua
 local ok, snacks = pcall(require, "snacks")
 if not ok then return end
 
 snacks.setup({
-  -- 1. Picker 配置 (类似 fzf)
+  -- ========== 1. Picker（文件搜索 / Grep，类似 fzf） ==========
   picker = {
     enabled = true,
-    ui_select = true,       -- 取代原生 vim.ui.select
-    layout = "center",      -- 浮窗居中显示
-    prompt = "🔍 Search: ", -- 提示符
+    ui_select = true,         -- 接管 vim.ui.select
+    prompt = "Search: ",
+    layout = {
+      preset = "default",    -- 关键：必须是能生成 root box 的 preset
+      cycle = false,
+    },
+    win = {
+      input = {
+        keys = {
+          ["<Esc>"] = { "close", mode = { "n", "i" } },
+        },
+      },
+    },
   },
 
-  -- 2. 终端配置 (Claude Code 等使用)
+  -- ========== 2. Terminal（Claude Code / 浮动终端） ==========
   terminal = {
     enabled = true,
     win = {
       style = "terminal",
       position = "float",
       border = "rounded",
-      size = { width = 0.8, height = 0.5 }, -- 宽高百分比
+      size = { width = 0.8, height = 0.5 },
     },
   },
 
-  -- 3. 通知配置
+  -- ========== 3. 通知 ==========
   notifier = {
     enabled = true,
-    timeout = 3000,        -- 单位毫秒
-    level = "info",        -- 过滤通知等级
+    timeout = 3000,
+    level = "info",
+    style = "compact",
   },
 
-  -- 4. 样式修正：彻底解决 E1512 报错
+  -- ========== 4. 样式（不设 listchars，彻底规避 E1512） ==========
   styles = {
     notification = {
       wo = {
         list = false,
-        winbar = "",                 -- 禁用 winbar 防止宽度计算错误
-        fillchars = "lastline: ",
-        listchars = "extends: ,precedes: ",
+        winbar = "",
       },
-      border = "rounded",            -- 统一边框样式
+      border = "rounded",
+    },
+    picker = {
+      wo = {
+        winbar = "",
+      },
     },
     terminal = {
       wo = {
         list = false,
         winbar = "",
-        fillchars = "lastline: ",
-        listchars = "extends: ,precedes: ",
       },
       border = "rounded",
     },
   },
 
-  -- 5. 其他实用功能
-  dashboard = { enabled = true }, 
-  indent = { 
-    enabled = true, 
-    color = "#7c6f64",             -- 缩进线颜色，柔和灰
+  -- ========== 5. 其他功能 ==========
+  dashboard = { enabled = true },
+
+  indent = {
+    enabled = true,
+    char = "│",
+    color = "#7c6f64",
   },
-  scroll = { enabled = false },     -- v0.11 建议关闭防止卡顿
+
+  scroll = {
+    enabled = false, -- 避免 0.11+ 偶发卡顿
+  },
 })
 
--- 快捷键绑定逻辑
+-- ========== 快捷键 ==========
 local map = vim.keymap.set
 
 -- 文件搜索 (类似 fzf :Files)
-map("n", "<Leader>f", function() snacks.picker.files() end, { desc = "Find Files" })
+map("n", "<Leader>f", function() snacks.picker.files() end, { desc = "Files" })
 
 -- 全局搜索文本 (类似 fzf :Ag / :Rg)
 map("n", "<Leader>a", function() snacks.picker.grep() end, { desc = "Grep" })
+
+-- 折叠
+map("n", "<Leader>z", "za", { desc = "Fold"})
