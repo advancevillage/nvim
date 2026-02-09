@@ -41,17 +41,43 @@ vim.lsp.enable('gopls')
 vim.api.nvim_create_autocmd("BufWritePre", {
   pattern = "*.go",
   callback = function()
-    local params = vim.lsp.util.make_range_params()
+    -- 获取当前 buffer 的 LSP client（通常是 gopls）
+    local client = vim.lsp.get_clients({ bufnr = 0 })[1]
+    if not client then return end
+
+    -- 明确传入 position_encoding（修复启动警告）
+    local params = vim.lsp.util.make_range_params(
+      nil,
+      client.offset_encoding
+    )
     params.context = { only = { "source.organizeImports" } }
-    local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params, 1000)
-    for client_id, res in pairs(result or {}) do
+
+    -- 请求 organizeImports
+    local result = vim.lsp.buf_request_sync(
+      0,
+      "textDocument/codeAction",
+      params,
+      1000
+    )
+
+    -- 应用 workspace edit
+    for _, res in pairs(result or {}) do
       for _, r in pairs(res.result or {}) do
         if r.edit then
-          local enc = (vim.lsp.get_client_by_id(client_id) or {}).offset_encoding or "utf-16"
-          vim.lsp.util.apply_workspace_edit(r.edit, enc)
+          vim.lsp.util.apply_workspace_edit(
+            r.edit,
+            client.offset_encoding
+          )
         end
       end
     end
-    vim.lsp.buf.format({ async = false })
+
+    -- 使用 gopls 进行格式化，避免多 formatter 冲突
+    vim.lsp.buf.format({
+      async = false,
+      filter = function(c)
+        return c.name == "gopls"
+      end,
+    })
   end,
 })
