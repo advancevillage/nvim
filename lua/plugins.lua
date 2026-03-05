@@ -57,7 +57,13 @@ return {
   {
     "folke/snacks.nvim",
     -- 这里的 config 会自动寻找并执行 lua/pluginconf/snacks.lua
-    config = function() require("pluginconf.snacks") end,
+    config = function() require("pluginconf.snacks") end
+  },
+
+  {
+    "lewis6991/gitsigns.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    config = function() require("pluginconf.gitsigns") end
   }
 }
 
