@@ -60,10 +60,18 @@ return {
     config = function() require("pluginconf.snacks") end
   },
 
+  -- Git 标记
   {
     "lewis6991/gitsigns.nvim",
     event = { "BufReadPre", "BufNewFile" },
     config = function() require("pluginconf.gitsigns") end
-  }
+  },
+
+  -- Claude Code 集成（推荐的纯 Lua MCP 实现）
+  {
+    "coder/claudecode.nvim",
+    dependencies = { "folke/snacks.nvim" },  -- 必须
+    config = function() require("pluginconf.claudecode") end
+  },
 }
 
