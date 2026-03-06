@@ -24,6 +24,7 @@ vim.keymap.set("n", "<leader>w", ":w!<CR>", opts)
 vim.keymap.set("n", "<leader>Q", ":qa<CR>", opts)
 vim.keymap.set("n", "<leader>W", ":wq<CR>", opts)
 vim.keymap.set("n", "<leader>d", ":cq<CR>", opts)
+vim.keymap.set("n", "<leader>e", ":e!<CR>", opts)
 
 -- 十六进制转换
 vim.keymap.set("n", "<leader>x", ":%!xxd<CR>", opts)
