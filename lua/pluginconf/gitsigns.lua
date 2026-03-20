@@ -12,7 +12,7 @@ local function on_attach(bufnr)
   -- 提交记录
   map("n", "<leader>hb", gs.blame, "Blame whole file")
   -- 修改Diff
-  map("n", "<leader>hd", gs.diffthis, "Diff This")
+  map("n", "<leader>hd", function() gs.diffthis("master") end, "Diff vs master")
 end
 
 gitsigns.setup({
