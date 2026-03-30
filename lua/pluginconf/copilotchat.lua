@@ -1,18 +1,21 @@
 require("CopilotChat").setup({
   window = {
-    width = 0.3,
-    height = 1.0,
-    border = "rounded",
-    position = "right",                 
-    title    = "CopilotChat",           
-    title_pos= "center",
+    layout = 'float',
+    width = 80, -- Fixed width in columns
+    height = 20, -- Fixed height in rows
+    border = 'rounded', -- 'single', 'double', 'rounded', 'solid'
+    title = '🤖 AI Assistant',
+    zindex = 100, -- Ensure window stays on top
   },
-  mappings = {
-    reset = {
-      normal = "<C-r>",
-      insert = "<C-r>",
-    },
+
+  headers = {
+    user = '👤',
+    assistant = '🤖',
+    tool = '🔧',
   },
+
+  separator = '-',
+  auto_fold = true, -- Automatically folds non-assistant messages
 })
 
 local map = vim.keymap.set
