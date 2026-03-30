@@ -67,6 +67,16 @@ return {
     config = function() require("pluginconf.gitsigns") end
   },
 
+  -- CopilotChat
+  {
+    "CopilotC-Nvim/CopilotChat.nvim",
+    dependencies = {
+      "github/copilot.vim",
+      "nvim-lua/plenary.nvim",
+    },
+    config = function() require("pluginconf.copilotchat") end
+  },
+
   -- Claude Code 集成（推荐的纯 Lua MCP 实现）
   {
     "coder/claudecode.nvim",
