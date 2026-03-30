@@ -8,8 +8,12 @@ vim.g.copilot_filetypes = {
 -- 2. 禁用默认的 Tab 键映射，防止冲突
 vim.g.copilot_no_tab_map = true
 
--- 3. 设置快捷键 <C-j> (Ctrl + j) 接受建议
-vim.keymap.set('i', '<C-j>', 'copilot#Accept("\\<CR>")', {
+vim.keymap.set('i', '<Tab>', function()
+    if vim.fn['copilot#GetDisplayedSuggestion']().text ~= '' then
+        return vim.fn['copilot#Accept']('\\<Tab>')
+    end
+    return '\t'
+end, {
     expr = true,
     replace_keycodes = false,
     silent = true
