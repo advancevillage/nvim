@@ -32,6 +32,7 @@ vim.keymap.set("n", "<leader>xx", ":%!xxd -r<CR>", opts)
 
 -- 文件行倒序
 vim.keymap.set("n", "<leader>r", ":g/^/m0<CR>", opts)
+vim.keymap.set("n", '<leader>cf', ':let @+ = expand("%")<CR>', opts)
 
 -- 窗口切换
 vim.keymap.set("n", "<leader>lw", "<C-W>l", opts)
