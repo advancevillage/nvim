@@ -35,9 +35,9 @@ cmp.setup({
     ['<C-e>'] = cmp.mapping.abort(),
   }),
   sources = cmp.config.sources({
-    { name = 'nvim_lsp' },
-  }, {
-    { name = 'buffer' },
-    { name = 'path' },
-  })
+    { name = "copilot" },     -- 新增，建议放第一位优先级最高
+    { name = "nvim_lsp" },
+    { name = "buffer" },
+    { name = "path" },
+  }),
 })
