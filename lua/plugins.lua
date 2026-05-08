@@ -37,8 +37,18 @@ return {
 
   -- Copilot
   {
-    'github/copilot.vim',
-    config = function() require('pluginconf.copilot') end
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    event = "InsertEnter",
+    config = function() require("pluginconf.copilot") end,
+  },
+
+  {
+    "zbirenbaum/copilot-cmp",
+    dependencies = { "zbirenbaum/copilot.lua" },
+    config = function()
+      require("copilot_cmp").setup()
+    end,
   },
 
   -- 核心补全引擎 (requires 变为 dependencies)
@@ -48,6 +58,7 @@ return {
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-path',
+      'zbirenbaum/copilot-cmp',
     },
     config = function()
       require('pluginconf.cmp')
@@ -65,16 +76,6 @@ return {
     "lewis6991/gitsigns.nvim",
     event = { "BufReadPre", "BufNewFile" },
     config = function() require("pluginconf.gitsigns") end
-  },
-
-  -- CopilotChat
-  {
-    "CopilotC-Nvim/CopilotChat.nvim",
-    dependencies = {
-      "github/copilot.vim",
-      "nvim-lua/plenary.nvim",
-    },
-    config = function() require("pluginconf.copilotchat") end
   },
 
   -- Claude Code 集成（推荐的纯 Lua MCP 实现）
