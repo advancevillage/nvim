@@ -16,6 +16,11 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<Leader>gh', vim.lsp.buf.hover, opts)
   vim.keymap.set('n', '<Leader>rn', vim.lsp.buf.rename, opts)
   vim.keymap.set('n', '<Leader>ca', vim.lsp.buf.code_action, opts)
+
+  -- 只有 server 支持 codeAction 时才绑定快捷键
+  if client.supports_method("textDocument/codeAction") then
+    vim.keymap.set('n', '<Leader>ca', vim.lsp.buf.code_action, opts)
+  end
 end
 
 -- 3. 配置 Golang LSP (gopls)
@@ -35,7 +40,6 @@ vim.lsp.config('gopls', {
   },
 })
 vim.lsp.enable('gopls')
-
 
 -- 4. 自动处理：保存时整理 import 并格式化
 vim.api.nvim_create_autocmd("BufWritePre", {
