@@ -31,3 +31,9 @@ brew link --force --overwrite node@20
 node -v
 node: v20.x.y
 ```
+
+### LazyGit
+```sh
+brew install lazygit
+lazygit --version
+```

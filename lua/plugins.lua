@@ -84,5 +84,12 @@ return {
     dependencies = { "folke/snacks.nvim" },  -- 必须
     config = function() require("pluginconf.claudecode") end
   },
+
+  -- LazyGit 集成
+  {
+    "kdheepak/lazygit.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = function() require("pluginconf.lazygit") end
+  },
 }
 
